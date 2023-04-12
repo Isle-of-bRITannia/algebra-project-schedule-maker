@@ -50,3 +50,5 @@ console.log(compareTimes(schedules[0], schedules[1]));//conflict
 console.log(compareTimes(schedules[0], schedules[2]));//no conflict
 
 console.log(getClassInfo(schedules[0]));//classD, 12-15
+
+export {compareTimes, getClassInfo};
