@@ -1,8 +1,10 @@
 class Schedule {
-    constructor(name, startTime, endTime) {
+    constructor(name, startTime, endTime, location, professor) {
         this.name = name;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.location = location;
+        this.professor = professor;
     }
 };
 
@@ -44,6 +46,8 @@ const compareTimes = (schedA, schedB) => {
 const getClassInfo = (readClass) => {
     return `Class Name: ${readClass.name}, Class Time: ${readClass.startTime} - ${readClass.endTime}`;
 };
+
+
 
 
 console.log(compareTimes(schedules[0], schedules[1]));//conflict
