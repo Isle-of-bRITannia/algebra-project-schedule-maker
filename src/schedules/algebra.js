@@ -7,21 +7,6 @@ class Schedule {
         this.professor = professor;
         this.credits = credits;
     }
-    getClassInfo() {
-        return `Class Name: ${this.name}, Class Time: ${this.startTime} - ${this.endTime}, Class Location: ${this.location}, Class Professor: ${this.professor}, Class Credits: ${this.credits}`;
-    }
-
-    //compare times of self to inputed array
-    // compareTimes(otherSchedule)//if other schedule is an array {
-    //     otherSchedule.map(
-    //         (schedule) => {
-    //             if (!(this.startTime >= schedule.endTime) && !(this.endTime <= schedule.startTime)) {
-    //                 console.log('Times conflict')
-    //             } else {
-    //                 console.log('No Time Conflict');
-    //             }
-    //         })
-    // }
 };
 
 
@@ -32,10 +17,6 @@ const schedules = [
     new Schedule('classD', 12, 15, 'room 4', 'professor D', 0),
 ]
 
-//generate unique number id for each class
-const generateNumberID = () => {
-    return Math.floor(Math.random() * 100000);
-}
 
 ///---------------Not Abstracted Functions-----------------///
 // const compareTimes = (startA, startB, endA, endB) => {
@@ -51,6 +32,12 @@ const generateNumberID = () => {
 //     )
 
 // }
+
+// const compareTimes = (startA, startB, endA, endB) => {
+//     const isConflict = !(startA >= endB) && !(endA <= startB);
+//     return isConflict ? 'Times conflict' : 'No time conflict';
+// };
+
 // const calcAllCredits = (schedule) => {
 //     let totalCredits = 0;
 //     for (let i = 0; i < schedule.length; i++) {
@@ -65,9 +52,9 @@ const compareTimes = (schedA, schedB) => {
     return isConflict ? 'Times conflict' : 'No time conflict';
 };
 
-// const getClassInfo = (readClass) => {
-//     return `Class Name: ${readClass.name}, Class Time: ${readClass.startTime} - ${readClass.endTime}`;
-// };
+const getClassInfo = (readClass) => {
+    return `Class Name: ${readClass.name}, Class Time: ${readClass.startTime} - ${readClass.endTime}`;
+};
 
 const calcAllCredits = (schedule) => {
     return schedule.reduce((totalCredits, course) => {
@@ -76,13 +63,14 @@ const calcAllCredits = (schedule) => {
 };
 
 
+export { Alg };
 
 
-console.log(compareTimes(schedules[4], schedules[1]));//conflict
-console.log(compareTimes(schedules[4], schedules[2]));//no conflict
+// const Base = (name, startTime, endTime, location, professor, credits) => ({
+//     tag: 'base',
+//     name, startTime, endTime, location, professor, credits
+// });
 
-console.log(schedules[4].getClassInfo());//classD, 12-15
+console.log(getClassInfo(schedules[4]));//classD, 12-15
 
 console.log(calcAllCredits(schedules));//10
-
-export { compareTimes, getClassInfo, calcAllCredits };
