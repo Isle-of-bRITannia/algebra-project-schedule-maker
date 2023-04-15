@@ -1,6 +1,6 @@
-import  * as Alg from './schedules/algebra.js';
+import {Alg}from './algebra.js';
 
- const Alg = {
+const API = {
     create: (oldSchedule, newSchedule) => Alg.create(oldSchedule, newSchedule),
     // do for all vars: name, startTime, endTime, location, professor, credits
     editTime: (schedule) => Alg.edit(schedule, idOfScheduleToChange, "time", newValue),
@@ -8,7 +8,9 @@ import  * as Alg from './schedules/algebra.js';
     validate: (schedule) => Alg.valid(schedule),
 };
 
-
+export {
+    API as Schedule
+}
 
 // edit -> sched
 // delete (evt, sched)

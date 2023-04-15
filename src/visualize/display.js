@@ -1,12 +1,12 @@
 import { pipe, match } from '../utility/index.js';
-import { Alg } from "../algebra.js";
+import { Alg } from "../schedules/algebra.js";
 
-const display = ({schedule}) => match({
+const display = (schedule) => match({
     // needs to: make a unique id and create and object to store info in
     // call validate
     //Jordan
     create: ({oldSchedule, newSchedule}) => {
-        return display({oldSchedule, newSchedule})(schedule);
+        return oldSchedule.concat(newSchedule);
     },
     //Jordan
     edit: ({oldSchedule, idOfScheduleToChange, valueToChange, newValue}) => {
@@ -24,7 +24,8 @@ const display = ({schedule}) => match({
     }
 
 
-})
+})(schedule)
+export {display};
 
 
 const compareTimes = (schedA, schedB) => {
@@ -45,12 +46,12 @@ const calcAllCredits = (schedule) => {
 //make a create unique id function
 
 
-console.log(compareTimes(schedules[4], schedules[1]));//conflict
-console.log(compareTimes(schedules[4], schedules[2]));//no conflict
+// console.log(compareTimes(schedules[4], schedules[1]));//conflict
+// console.log(compareTimes(schedules[4], schedules[2]));//no conflict
 
-console.log(getClassInfo(schedules[4]));//classD, 12-15
+// console.log(getClassInfo(schedules[4]));//classD, 12-15
 
-console.log(calcAllCredits(schedules));//10
+// console.log(calcAllCredits(schedules));//10
 
 
 

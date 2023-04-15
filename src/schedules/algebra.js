@@ -1,9 +1,10 @@
 //name, startTime, endTime, location, professor, credits
 
 const Alg = {
-    schedule: (schedule) => ({
-        _tag: 'schedule',
-        schedule
+    create: (oldSchedule, newSchedule) => ({
+        _tag: 'create',
+        oldSchedule,
+        newSchedule
     }),
     editedSchedule: (schedule) => ({
         _tag: 'edit',
