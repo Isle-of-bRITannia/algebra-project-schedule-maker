@@ -9,23 +9,55 @@
 </head>
 
 <body>
-  <table>
+  <table id="scheduleTable">
     <tr>
-      <th>Company</th>
-      <th>Contact</th>
-      <th>Country</th>
+      <th>Status</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Wednesday</th>
+      <th>Thursday</th>
+      <th>Friday</th>
+      <th>Saturday</th>
     </tr>
-    <tr>
-      <td>Alfreds Futterkiste</td>
-      <td>Maria Anders</td>
-      <td>Germany</td>
+    <tr id="row1">
+      <td class="statusCol"># Credits</td>
+      <td class="monCol classInfo">IGME-460 3:00-3:15pm</td>
+      <td class="tuesCol classInfo">IGME-480 11:00-12:15pm</td>
+      <td class="wedCol classInfo">IGME-460 3:00-3:15pm</td>
+      <td class="thursCol classInfo">IGME-480 11:00-12:15pm</td>
+      <td class="friCol classInfo">IGME-460 3:00-3:15pm</td>
+      <td class="satCol classInfo">IGME-480 11:00-12:15pm</td>
     </tr>
-    <tr>
-      <td>Centro comercial Moctezuma</td>
-      <td>Francisco Chang</td>
-      <td>Mexico</td>
+    <tr id="row2">
+      <td class="statusCol">Fulltime</td>
+      <td class="monCol classInfo">PSYC-223 10:00-10:50am</td>
+      <td class="tuesCol classInfo">IGME-340 6:30-7:15pm</td>
+      <td class="wedCol classInfo">PSYC-223 10:00-10:50am</td>
+      <td class="thursCol classInfo">IGME-340 6:30-7:15pm</td>
+      <td class="friCol classInfo">PSYC-223 10:00-10:50am</td>
+      <td class="satCol classInfo">IGME-340 6:30-7:15pm</td>
+    </tr>
+    <tr id="row3">
+      <td class="statusCol">Add bttn</td>
+      <td class="monCol classInfo">PSYC-223 10:00-10:50am</td>
+      <td class="tuesCol classInfo">IGME-340 6:30-7:15pm</td>
+      <td class="wedCol classInfo">PSYC-223 10:00-10:50am</td>
+      <td class="thursCol classInfo">IGME-340 6:30-7:15pm</td>
+      <td class="friCol classInfo">PSYC-223 10:00-10:50am</td>
+      <td class="satCol classInfo">IGME-340 6:30-7:15pm</td>
+    </tr>
+    <tr id="rowLast">
+      <td class="statusCol async">Async classes</td>
+      <td class="monCol classInfo"></td>
+      <td class="tuesCol classInfo">IGME-123 1:30-2:30pm</td>
+      <td class="wedCol classInfo"></td>
+      <td class="thursCol classInfo">IGME-123 1:30-2:30pm</td>
+      <td class="friCol classInfo"></td>
+      <td class="satCol classInfo"></td>
     </tr>
   </table>
+
+  <div id="editMenu">Test</div>
 
   <script type="module" src="./src/index.js"></script>
 </body>

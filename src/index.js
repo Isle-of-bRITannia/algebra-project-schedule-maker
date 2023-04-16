@@ -10,6 +10,12 @@ import { display } from './visualize/display.js';
 
 // displaying it in a table code on the html page stuff goes here
 // Jordan
+document.querySelectorAll(".classInfo").forEach(
+    (i) => i.addEventListener('click', () => {
+        document.getElementById("editMenu").style.display = "block";
+    })
+)
+document.getElementById("editMenu").onclick = () => {document.getElementById("editMenu").style.display = "none";}
 
 
 // const scheduleA = Schedule.delete(
