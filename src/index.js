@@ -11,33 +11,54 @@ import { display } from './visualize/display.js';
 // displaying it in a table code on the html page stuff goes here
 // Jordan
 
-const test = Schedule.create([
-    {
-        name: "classOG",
-        startTime: 12,
-        endTime: 15,
-        day: "Monday",
-        location: "MSS-1275",
-        professor: "Travis",
-    }], [
-    {
-        name: "classA",
-        startTime: 12,
-        endTime: 15,
-        day: "Monday",
-        location: "MSS-1275",
-        professor: "Travis",
-    },
-    {
-        name: "classB",
-        startTime: 12,
-        endTime: 15,
-        day: "Monday",
-        location: "MSS-1275",
-        professor: "Travis",
-    }
-])
 
-const res = display(test);
+// const scheduleA = Schedule.delete(
+const scheduleA = Schedule.editName(
+    Schedule.create([
+        {
+            name: "classOG",
+            id: 123,
+            startTime: 12,
+            endTime: 15,
+            day: "Monday",
+            location: "MSS-1275",
+            professor: "Travis",
+        },
+    ],
+        [
+            {
+                name: "classA",
+                startTime: 12,
+                endTime: 15,
+                day: "Monday",
+                location: "MSS-1275",
+                professor: "Travis",
+            },
+            {
+                name: "classB",
+                startTime: 12,
+                endTime: 15,
+                day: "Monday",
+                location: "MSS-1275",
+                professor: "Travis",
+            }
+        ]
+    ),
+    123,
+    "classTest2"
+);
+//     123
+// );
+
+const res = display()(scheduleA);
+// const res = display()(Schedule.editName(scheduleA, 123, "classTest"));
+
+// const scheduleB = Schedule.editName(res.oldSchedule, "123", "classTest");
+// const res2 = display()(scheduleB);
+
+// const scheduleC = Schedule.delete(res2, "123");
+// const res3 = display()(scheduleC);
 
 console.log(res);
+// console.log(res2);
+// console.log(res3);

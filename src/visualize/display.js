@@ -1,31 +1,49 @@
-import { pipe, match } from '../utility/index.js';
+import { pipe, match, randomNum } from '../utility/index.js';
 import { Alg } from "../schedules/algebra.js";
 
-const display = (schedule) => match({
+// const forEach = (f) => (arr) => arr.forEach(f);
+
+
+const display = () => match({
     // needs to: make a unique id and create and object to store info in
     // call validate
     //Jordan
-    create: ({oldSchedule, newSchedule}) => {
-        return oldSchedule.concat(newSchedule);
+    create: ({ oldSchedule, newSchedule }) => {
+        // oldSchedule.forEach((s) => s.id ?? randomNum());
+        // debugger;
+        newSchedule.forEach((s) => s.id = randomNum());
+        return Alg.create((oldSchedule.concat(newSchedule)), []);
     },
     //Jordan
-    edit: ({oldSchedule, idOfScheduleToChange, valueToChange, newValue}) => {
-        return oldSchedule[idOfScheduleToChange][valueToChange] = newValue;
+    edit: ({ schedule, idOfScheduleToChange, valueToChange, newValue }) => {
+        // debugger;
+        const combinedSchedule = display()(Alg.create(schedule.oldSchedule, schedule.newSchedule));
+        combinedSchedule.oldSchedule.forEach( (s) => s.id == idOfScheduleToChange ? s[valueToChange] = newValue : "")
+        // forEach((s) => s.id == idOfScheduleToChange ? s[valueToChange] = newValue : "")(combinedSchedule.oldSchedule)
+        return Alg.create(combinedSchedule.oldSchedule, []);
+
+        // return pipe(
+        //     forEach((s) => s.id == idOfScheduleToChange ? s[valueToChange] = newValue : "")(display()(Alg.create(schedule.oldSchedule, schedule.newSchedule).oldSchedule).oldSchedule),
+        //     Alg.create
+        // );
     },
     //Jordan
     // find class to delete in list and slice array in correct spot
-    delete: ({oldSchedule, idOfScheduleToChange, }) => {
-        return oldSchedule[idOfScheduleToChange] 
+    delete: ({ schedule, idOfScheduleToDelete, }) => {
+        // debugger;
+        const combinedSchedule = display()(Alg.create(schedule.oldSchedule, schedule.newSchedule));
+        combinedSchedule.oldSchedule.filter( (s) => s.id == idOfScheduleToDelete)
+        return Alg.create(combinedSchedule.oldSchedule, []);
     },
-    
+
     // needs to run: checkTime, checkInfo, checkIdUnique, calcCredits (total 18 max),
-    valid: ({oldSchedule}) => {
+    valid: ({ oldSchedule }) => {
         return oldSchedule;
     }
 
 
-})(schedule)
-export {display};
+})
+export { display };
 
 
 const compareTimes = (schedA, schedB) => {
