@@ -5,10 +5,16 @@ import { display } from './visualize/display.js';
 //pop up varibles
 const popAdd = document.querySelector('#pop-media-add');
 const popEdit = document.querySelector('#pop-media-edit');
+const popAddClose = document.querySelector('#pop-media-cancel');
+const popEditClose = document.querySelector('#pop-media-editcancel');
 const popClear = document.querySelector('#pop-media-clear');
 const popEditClear = document.querySelector('#pop-media-editclear');
 const popup = document.querySelector('#show-popup');
 
+const scheduleTable = document.querySelector('#scheduleTable');
+
+let currentRow = 5;
+let daysOfTheWeek = ["async", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 document.querySelectorAll(".classInfo").forEach(
     (i) => i.addEventListener('click', () => {
         editpopUp();
@@ -25,7 +31,7 @@ const editpopUp = () => {
 }
 
 
-const scheduleA =
+let scheduleA =
     Schedule.create([
         {
             name: "classOG",
@@ -72,10 +78,10 @@ const scheduleA =
 
 
 const createNewClass = () => {
-    const scheduleB =
-        Schedule.create([
-            scheduleA,
-        ],
+    scheduleA =
+        Schedule.create(
+            display()(scheduleA)
+            ,
             [
                 {
                     name: document.querySelector('#class-name').value,
@@ -87,20 +93,65 @@ const createNewClass = () => {
                 }
             ]);
 
-    console.log(display()(scheduleB));
+    const res = display()(scheduleA);
+    if (Schedule.validate(res.oldSchedule)) {
+        console.log(res);
+        let newRow = scheduleTable.insertRow(currentRow++);
+        for (let i = 0; i < daysOfTheWeek.length; i++) {
+            if (daysOfTheWeek[i] === document.querySelector('#class-day').value.toLowerCase()) {
 
-    console.log('name:' + document.querySelector('#class-name').value,
-        'startTime:' + document.querySelector('#start-time').value,
-        'endTime:' + document.querySelector('#end-time').value,
-        'day:' + document.querySelector('#class-day').value,
-        'location:' + document.querySelector('#class-location').value,
-        'professor:' + document.querySelector('#class-professor').value);
+                let newCell = newRow.insertCell(i);
+                newCell.classList.add("classInfo");
+                //console.log(res.oldSchedule)
+                let tempStart;
+                let tempEnd;
+                if (res[res.length - 1].startTime.split(":")[0] > 12) {
+                    tempStart = Number(res[res.length - 1].startTime) - 12;
+                    tempStart.toString();
+                    tempStart += 'pm';
+                }
+                else {
+                    tempStart = res[res.length - 1].startTime;
+                    tempStart.toString();
+                    tempStart += 'am';
+                }
+
+                if (res[res.length - 1].endTime.split(":")[0] > 12) {
+                    tempEnd = Number(res[res.length - 1].endTime) - 12;
+                    tempEnd.toString();
+                    tempEnd += 'pm';
+                }
+                else {
+                    tempEnd = res[res.length - 1].endTime;
+                    tempEnd.toString();
+                    tempEnd += 'am';
+                }
+                newCell.innerHTML = `${res[res.length - 1].name} ${tempStart}-${tempEnd}`;
+            }
+            else {
+                let newCell = newRow.insertCell(i);
+                newCell.classList.add("classInfo");
+                newCell.innerHTML = " ";
+            }
+        }
+    }
+    addpopUp();
 }
 
+const clearAddFields = () => {
+    document.querySelector('#class-name').value = "";
+    document.querySelector('#start-time').value = '';
+    document.querySelector('#end-time').value = '';
+    document.querySelector('#class-day').value = '';
+    document.querySelector('#class-location').value = '';
+    document.querySelector('#class-professor').value = '';
+    document.querySelector('#class-credits').value = '';
 
-const res = display()(scheduleA);
-console.log(Schedule.validate(res.oldSchedule));
-console.log(res);
+}
+
+// const res = display()(scheduleA);
+// console.log(Schedule.validate(res.oldSchedule));
+
 
 
 
@@ -108,6 +159,8 @@ console.log(res);
 //event listeners
 popAdd.addEventListener('click', createNewClass);
 popup.addEventListener('click', addpopUp);
-popClear.addEventListener('click', addpopUp);
+popClear.addEventListener('click', clearAddFields);
 popEdit.addEventListener('click', editpopUp);
 popEditClear.addEventListener('click', editpopUp);
+popAddClose.addEventListener('click', addpopUp);
+popEditClose.addEventListener('click', editpopUp);
