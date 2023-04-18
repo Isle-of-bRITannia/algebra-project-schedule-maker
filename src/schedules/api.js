@@ -11,7 +11,7 @@ const API = {
     editLocation: (schedule, idOfScheduleToChange, newValue) => Alg.editedSchedule(schedule, idOfScheduleToChange, "location", newValue),
     editProfessor: (schedule, idOfScheduleToChange, newValue) => Alg.editedSchedule(schedule, idOfScheduleToChange, "professor", newValue),
     delete: (schedule, idOfScheduleToDelete) => Alg.deleteSchedule(schedule, idOfScheduleToDelete),
-    validate: (schedule) => Alg.valid(schedule),
+    validate: (schedule) => Alg.validSchedule(schedule),
 
 };
 
