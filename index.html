@@ -5,7 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Schedule</title>
-  <link rel="stylesheet" href="src/style.css">
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -38,7 +39,9 @@
       <td class="satCol classInfo">IGME-340 6:30-7:15pm</td>
     </tr>
     <tr id="row3">
-      <td class="statusCol">Add bttn</td>
+      <td class="statusCol">
+        <button type="button" id="show-popup">Add Class</button>
+      </td>
       <td class="monCol classInfo">PSYC-223 10:00-10:50am</td>
       <td class="tuesCol classInfo">IGME-340 6:30-7:15pm</td>
       <td class="wedCol classInfo">PSYC-223 10:00-10:50am</td>
@@ -57,9 +60,104 @@
     </tr>
   </table>
 
-  <div id="editMenu">Test</div>
+  <div class="popup" id="popup-1">
+    <div class="overlay">
+      <div class="popcontent">
+        <h1 id="pop-title">Add Class</h1>
+        <form id='class-form' action="">
+          <div>
+            <label for="Class Name">Class Name:</label>
+            <input type="text" name="Class Name" id="class-name" placeholder="Class Name">
+          </div>
+
+          <div>
+            <label for="Class Credits">Class Credits:</label>
+            <input type="number" name="Class Credits" id="class-credits" placeholder="Credits">
+          </div>
+
+
+          <div>
+            <label for="Class Teacher">Class Teacher:</label>
+            <input type="text" name="Class Teacher" id="class-professor" placeholder="professor">
+          </div>
+          <div>
+            <label for="Class Room">Class Room:</label>
+            <input type="text" name="Class Room" id="class-location" placeholder="Class name">
+          </div>
+          <div>
+            <label for="Class Days">Class Days:</label>
+            <input type="text" name="Class Days" id="class-day" placeholder="Days">
+          </div>
+          <div>
+            <label for="Start Time">Start Time</label>
+            <input type="time" name="Start Time" id="start-time">
+          </div>
+          <div>
+            <label for="End Time">End Time</label>
+            <input type="time" name="End Time" id="end-time">
+          </div>
+
+
+          <div id="pop-media-btns">
+
+            <button type="button" class='pop-media-btn' id="pop-media-clear">Clear</button>
+            <button type="button" class='pop-media-btn' id="pop-media-add">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup" id="popup-2">
+    <div class="overlay">
+      <div class="popcontent">
+        <h1 id="pop-title">Edit Class</h1>
+        <form id='class-form' action="">
+          <div>
+            <label for="Class Name">Class Name:</label>
+            <input type="text" name="Class Name" id="class-Name" placeholder="Class Name">
+          </div>
+
+          <div>
+            <label for="Class Credits">Class Credits:</label>
+            <input type="number" name="Class Credits" id="class-credits" placeholder="Credits">
+          </div>
+
+
+          <div>
+            <label for="Class Teacher">Class Professor:</label>
+            <input type="text" name="Class Teacher" id="class-professor" placeholder="professor">
+          </div>
+          <div>
+            <label for="Class Room">Class Room:</label>
+            <input type="text" name="Class Room" id="class-room" placeholder="Class Room">
+          </div>
+          <div>
+            <label for="Class Days">Class Days:</label>
+            <input type="text" name="Class Days" id="class-days" placeholder="Days">
+          </div>
+          <div>
+            <label for="Start Time">Start Time</label>
+            <input type="time" name="Start Time" id="start-time">
+          </div>
+          <div>
+            <label for="End Time">End Time</label>
+            <input type="time" name="End Time" id="end-time">
+          </div>
+
+
+          <div id="pop-media-btns">
+
+            <button type="button" class='pop-media-btn' id="pop-media-editclear">Clear</button>
+            <button type="button" class='pop-media-btn' id="pop-media-edit">Confirm Change</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <script type="module" src="./src/index.js"></script>
+
 </body>
 
 </html>
