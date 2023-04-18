@@ -1,20 +1,26 @@
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+#scheduleTable, th{
+  border: 1px solid black;
+  border-spacing: 0px;
+
 }
 
-#app {
-  width: 100vw;
-  height: 100vh;
-  padding: 1rem;
-  text-align: center;
-  display: flex;
+td {
+  padding: 15px;
 }
 
-#canvas {
-  margin: auto;
-  width: 100vh;
+.statusCol{
+  border-bottom: 0px;
+  border-right: 1px solid black;
+
+}
+.async{
+  border-top: 1.5px solid black;
+}
+.classInfo{
+  border: 1px solid black;
+  background-color: aliceblue;
+}
+
+#editMenu {
+  display: none;
 }

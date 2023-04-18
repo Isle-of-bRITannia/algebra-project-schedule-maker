@@ -1,41 +1,26 @@
 import { pipe, match, randomNum } from '../utility/index.js';
 import { Alg } from "../schedules/algebra.js";
 
-// const forEach = (f) => (arr) => arr.forEach(f);
-
-
 const display = () => match({
-    // needs to: make a unique id and create and object to store info in
-    // call validate
-    //Jordan
     create: ({ oldSchedule, newSchedule }) => {
-        // oldSchedule.forEach((s) => s.id ?? randomNum());
-        // debugger;
         newSchedule.forEach((s) => s.id = randomNum());
-        return Alg.create((oldSchedule.concat(newSchedule)), []);
+        return [
+            ...oldSchedule,
+            ...newSchedule
+        ]
     },
-    //Jordan
     edit: ({ schedule, idOfScheduleToChange, valueToChange, newValue }) => {
-        // debugger;
-        const combinedSchedule = display()(Alg.create(schedule.oldSchedule, schedule.newSchedule));
-        combinedSchedule.oldSchedule.forEach((s) => s.id == idOfScheduleToChange ? s[valueToChange] = newValue : "")
-        // forEach((s) => s.id == idOfScheduleToChange ? s[valueToChange] = newValue : "")(combinedSchedule.oldSchedule)
-        return Alg.create(combinedSchedule.oldSchedule, []);
-
-        // return pipe(
-        //     forEach((s) => s.id == idOfScheduleToChange ? s[valueToChange] = newValue : "")(display()(Alg.create(schedule.oldSchedule, schedule.newSchedule).oldSchedule).oldSchedule),
-        //     Alg.create
-        // );
+        debugger;
+        const combinedSchedule = display()(schedule);
+        combinedSchedule.forEach( (s) => s.id == idOfScheduleToChange ? s[valueToChange] = newValue : "")
+        return combinedSchedule;
     },
-    //Jordan
-    // find class to delete in list and slice array in correct spot
     delete: ({ schedule, idOfScheduleToDelete, }) => {
-        // debugger;
-        const combinedSchedule = display()(Alg.create(schedule.oldSchedule, schedule.newSchedule));
-        combinedSchedule.oldSchedule.filter((s) => s.id == idOfScheduleToDelete)
-        return Alg.create(combinedSchedule.oldSchedule, []);
+        debugger;
+        const combinedSchedule = display()(schedule);
+        const modifiedArray = combinedSchedule.filter( (s) => s.id != idOfScheduleToDelete)
+        return modifiedArray;
     },
-
     valid: ({ oldSchedule }) => {
         //Check unique ID => Check time conflict => Check total credits =>Valid
         const compareTimes = (oldSchedule) => {
@@ -101,6 +86,7 @@ const display = () => match({
 
 })
 export { display };
+
 
 
 const getClassInfo = (readClass) => {

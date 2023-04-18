@@ -6,13 +6,17 @@ const Alg = {
         oldSchedule,
         newSchedule
     }),
-    editedSchedule: (schedule) => ({
+    editedSchedule: (schedule, idOfScheduleToChange, valueToChange, newValue) => ({
         _tag: 'edit',
-        schedule
+        schedule,
+        idOfScheduleToChange,
+        valueToChange,
+        newValue
     }),
-    deleteSchedule: (schedule) => ({
+    deleteSchedule: (schedule, idOfScheduleToDelete) => ({
         _tag: 'delete',
-        schedule
+        schedule,
+        idOfScheduleToDelete
     }),
     validSchedule: (schedule) => ({
         _tag: 'valid',
