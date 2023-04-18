@@ -73,9 +73,9 @@ const scheduleA =
 
 const createNewClass = () => {
     const scheduleB =
-        Schedule.create([
-            scheduleA,
-        ],
+        Schedule.create(
+            display()(scheduleA)
+            ,
             [
                 {
                     name: document.querySelector('#class-name').value,
@@ -97,10 +97,9 @@ const createNewClass = () => {
         'professor:' + document.querySelector('#class-professor').value);
 }
 
-
-const res = display()(scheduleA);
-console.log(Schedule.validate(res.oldSchedule));
-console.log(res);
+// const res = display()(scheduleA);
+// console.log(Schedule.validate(res.oldSchedule));
+// console.log(res);
 
 
 
