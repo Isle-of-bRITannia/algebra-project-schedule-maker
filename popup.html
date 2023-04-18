@@ -115,16 +115,41 @@
             <div class="popcontent">
                 <h1 id="pop-title">Add Class</h1>
                 <form id='class-form' action="">
+                    <div>
+                        <label for="Class Name">Class Name:</label>
+                        <input type="text" name="Class Name" id="class-Name" placeholder="Class Name">
+                    </div>
 
-                    <input type="text" name="Class Name" id="class-Name" placeholder="Class Name">
+                    <div>
+                        <label for="Class Credits">Class Credits:</label>
+                        <input type="number" name="Class Credits" id="class-credits" placeholder="Credits">
+                    </div>
 
-                    <input type="number" name="Class Credits" id="class-credits" placeholder="Credits">
 
-                    <input type="text" name="Class Teacher" id="class-teacher" placeholder="professor">
-                    <input type="text" name="Class Room" id="class-room" placeholder="Class name">
-                    <input type="datetime" name="Start Time" id="start-Time" placeholder="Start time">
-                    <input type="datetime" name="End Time" id="end-Time" placeholder="End Time">
+                    <div>
+                        <label for="Class Teacher">Class Teacher:</label>
+                        <input type="text" name="Class Teacher" id="class-teacher" placeholder="professor">
+                    </div>
+                    <div>
+                        <label for="Class Room">Class Room:</label>
+                        <input type="text" name="Class Room" id="class-room" placeholder="Class name">
+                    </div>
+                    <div>
+                        <label for="Class Days">Class Days:</label>
+                        <input type="text" name="Class Days" id="class-days" placeholder="Days">
+                    </div>
+                    <div>
+                        <label for="Start Time">Start Time</label>
+                        <input type="time" name="Start Time" id="start-time">
+                    </div>
+                    <div>
+                        <label for="End Time">End Time</label>
+                        <input type="time" name="End Time" id="end-time">
+                    </div>
+
+
                     <div id="pop-media-btns">
+
                         <button type="button" class='pop-media-btn' id="pop-media-clear">Clear</button>
                         <button type="button" class='pop-media-btn' id="pop-media-add">Add</button>
                     </div>

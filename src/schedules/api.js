@@ -5,7 +5,7 @@ const API = {
     // do for all vars: name, startTime, endTime, location, professor, credits
     editTime: (schedule) => Alg.edit(schedule, idOfScheduleToChange, "time", newValue),
     delete: (schedule) => Alg.delete(schedule, idOfScheduleToChange),
-    validate: (schedule) => Alg.valid(schedule),
+    validate: (schedule) => Alg.validSchedule(schedule),
 };
 
 export {
