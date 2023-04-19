@@ -70,7 +70,6 @@ const clearAddFields = () => {
     document.querySelector('#class-name').value = "";
     document.querySelector('#start-time').value = '';
     document.querySelector('#end-time').value = '';
-    document.querySelector('#class-day').value = '';
     document.querySelector('#class-location').value = '';
     document.querySelector('#class-professor').value = '';
     document.querySelector('#class-credits').value = '';
@@ -180,7 +179,6 @@ const addClassButton = () => {
     if (document.querySelector('#class-name').value.trim() !== "" &&
         document.querySelector('#start-time').value.trim() !== "" &&
         document.querySelector('#end-time').value.trim() !== "" &&
-        document.querySelector('#class-day').value.trim() !== "" &&
         document.querySelector('#class-location').value.trim() !== "" &&
         document.querySelector('#class-professor').value.trim() !== "") {
         popAdd.removeAttribute('disabled');
@@ -192,12 +190,11 @@ const addClassButton = () => {
 
 //event listeners to update add class button
 document.querySelector('#class-name').addEventListener('change', addClassButton);
-document.querySelector('#start-time').addEventListener('change', addClassButton);;
-document.querySelector('#end-time').addEventListener('change', addClassButton);;
-document.querySelector('#class-day').addEventListener('change', addClassButton);;
-document.querySelector('#class-location').addEventListener('change', addClassButton);;
-document.querySelector('#class-professor').addEventListener('change', addClassButton);;
-document.querySelector('#class-credits').addEventListener('change', addClassButton);;
+document.querySelector('#start-time').addEventListener('change', addClassButton);
+document.querySelector('#end-time').addEventListener('change', addClassButton);
+document.querySelector('#class-location').addEventListener('change', addClassButton);
+document.querySelector('#class-professor').addEventListener('change', addClassButton);
+document.querySelector('#class-credits').addEventListener('change', addClassButton);
 
 //event listeners
 popAdd.addEventListener('click', createNewClass);
