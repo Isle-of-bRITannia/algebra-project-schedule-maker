@@ -1,29 +1,40 @@
-#scheduleTable, th{
-    border: 1px solid black;
-    border-spacing: 0px;
-  }
-  
-  td {
-    padding: 15px;
-  }
-  
-  .statusCol{
-    border-bottom: 0px;
-    border-right: 1px solid black;
-  
-  }
-  .async{
-    border-top: 1.5px solid black;
-  }
-  .classInfo{
-    border: 1px solid black;
-    background-color: aliceblue;
-  }
-  
-  #editMenu {
-    display: none;
-  }
+#statusCol{
+  float:left;
+  float: left;
+  border: 2px solid black;
+  margin-right: 10px;
+}
+#statusHeader{
+  font-weight: bold;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  text-align: center;
+  border-bottom: 2px solid black;
+}
 
+
+.statusInfo{
+  padding: 20px;
+  /* border: 1.5px solid black; */
+  margin: 0px;
+}
+#scheduleTable, th{
+  border: 1px solid black;
+  border-spacing: 0px;
+}
+
+td {
+  padding: 15px;
+}
+
+.classInfo{
+  border: 1px solid black;
+  background-color: aliceblue;
+}
+
+#editMenu {
+  display: none;
+}
 
 /* Popup */
   .popup .overlay {

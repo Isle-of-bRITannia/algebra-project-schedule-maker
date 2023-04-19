@@ -45,7 +45,7 @@ let scheduleA =
         },
         {
             name: "classOG",
-            id: 123,
+            id: 126,
             startTime: '19:13',
             endTime: '20:10',
             day: "Monday",
@@ -59,7 +59,7 @@ let scheduleA =
                 name: "classA",
                 startTime: '00:30',
                 endTime: '01:20',
-                day: "Monday",
+                day: "Wednesday",
                 credits: 3,
                 location: "MSS-1275",
                 professor: "Travis",
@@ -68,7 +68,34 @@ let scheduleA =
                 name: "classB",
                 startTime: '05:40',
                 endTime: '22:20',
-                day: "Monday",
+                day: "Thursday",
+                credits: 5,
+                location: "MSS-1275",
+                professor: "Travis",
+            },
+            {
+                name: "classC",
+                startTime: '05:40',
+                endTime: '22:20',
+                day: "Tuesday",
+                credits: 5,
+                location: "MSS-1275",
+                professor: "Travis",
+            },
+            {
+                name: "classD",
+                startTime: '05:40',
+                endTime: '22:20',
+                day: "Friday",
+                credits: 5,
+                location: "MSS-1275",
+                professor: "Travis",
+            },
+            {
+                name: "classE",
+                startTime: '05:40',
+                endTime: '22:20',
+                day: "Thursday",
                 credits: 5,
                 location: "MSS-1275",
                 professor: "Travis",
@@ -92,48 +119,91 @@ const createNewClass = () => {
                     professor: document.querySelector('#class-professor').value
                 }
             ]);
-
+    // remove all current rows
+    document.querySelectorAll(".rowOfClasses").forEach(
+        (r) => { r.remove() }
+    );
     const res = display()(scheduleA);
     if (Schedule.validate(res.oldSchedule)) {
         console.log(res);
-        let newRow = scheduleTable.insertRow(currentRow++);
-        for (let i = 0; i < daysOfTheWeek.length; i++) {
-            if (daysOfTheWeek[i] === document.querySelector('#class-day').value.toLowerCase()) {
+        // make array of classers per day
+        const monClasses = res.filter((c) => c.day === "Monday");
+        const tuesClasses = res.filter((c) => c.day === "Tuesday");
+        const wedClasses = res.filter((c) => c.day === "Wednesday");
+        const thursClasses = res.filter((c) => c.day === "Thursday");
+        const friClasses = res.filter((c) => c.day === "Friday");
+        const satClasses = res.filter((c) => c.day === "Saturday");
 
-                let newCell = newRow.insertCell(i);
-                newCell.classList.add("classInfo");
-                //console.log(res.oldSchedule)
-                let tempStart;
-                let tempEnd;
-                if (res[res.length - 1].startTime.split(":")[0] > 12) {
-                    tempStart = Number(res[res.length - 1].startTime) - 12;
-                    tempStart.toString();
-                    tempStart += 'pm';
-                }
-                else {
-                    tempStart = res[res.length - 1].startTime;
-                    tempStart.toString();
-                    tempStart += 'am';
-                }
+        // finding the day with the most classes
+        const numClasses = [monClasses.length, tuesClasses.length, wedClasses.length, thursClasses.length, friClasses.length, satClasses.length];
+        const mostClasses = Math.max(...numClasses);
 
-                if (res[res.length - 1].endTime.split(":")[0] > 12) {
-                    tempEnd = Number(res[res.length - 1].endTime) - 12;
-                    tempEnd.toString();
-                    tempEnd += 'pm';
-                }
-                else {
-                    tempEnd = res[res.length - 1].endTime;
-                    tempEnd.toString();
-                    tempEnd += 'am';
-                }
-                newCell.innerHTML = `${res[res.length - 1].name} ${tempStart}-${tempEnd}`;
-            }
-            else {
-                let newCell = newRow.insertCell(i);
-                newCell.classList.add("classInfo");
-                newCell.innerHTML = " ";
+
+        // make the row elements function
+        const makeCell = (classItem, rowElement) => {
+            if (classItem) {
+                let newCell = rowElement.insertCell();
+                // what to display
+                newCell.innerHTML = classItem.name;
+            } else {
+                let newCell = rowElement.insertCell();
+                newCell.innerHTML = "";
             }
         }
+
+        for (let i = 0; i < mostClasses; i++) {
+            const newRow = scheduleTable.insertRow();
+ 
+            makeCell(monClasses[i], newRow);
+            makeCell(tuesClasses[i], newRow);
+            makeCell(wedClasses[i], newRow);
+            makeCell(thursClasses[i], newRow);
+            makeCell(friClasses[i], newRow);
+            makeCell(satClasses[i], newRow);
+            
+        }
+
+
+        debugger;
+
+        // let newRow = scheduleTable.insertRow(currentRow++);
+        // for (let i = 0; i < daysOfTheWeek.length; i++) {
+        //     if (daysOfTheWeek[i] === document.querySelector('#class-day').value.toLowerCase()) {
+
+        //         let newCell = newRow.insertCell(i);
+        //         newCell.classList.add("classInfo");
+        //         //console.log(res.oldSchedule)
+        //         let tempStart;
+        //         let tempEnd;
+        //         if (res[res.length - 1].startTime.split(":")[0] > 12) {
+        //             tempStart = Number(res[res.length - 1].startTime) - 12;
+        //             tempStart.toString();
+        //             tempStart += 'pm';
+        //         }
+        //         else {
+        //             tempStart = res[res.length - 1].startTime;
+        //             tempStart.toString();
+        //             tempStart += 'am';
+        //         }
+
+        //         if (res[res.length - 1].endTime.split(":")[0] > 12) {
+        //             tempEnd = Number(res[res.length - 1].endTime) - 12;
+        //             tempEnd.toString();
+        //             tempEnd += 'pm';
+        //         }
+        //         else {
+        //             tempEnd = res[res.length - 1].endTime;
+        //             tempEnd.toString();
+        //             tempEnd += 'am';
+        //         }
+        //         newCell.innerHTML = `${res[res.length - 1].name} ${tempStart}-${tempEnd}`;
+        //     }
+        //     else {
+        //         let newCell = newRow.insertCell(i);
+        //         newCell.classList.add("classInfo");
+        //         newCell.innerHTML = " ";
+        //     }
+        // }
     }
     addpopUp();
 }
