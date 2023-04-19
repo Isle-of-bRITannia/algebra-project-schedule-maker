@@ -132,6 +132,7 @@ const createNewClass = () => {
                 if (classItem.startTime.split(":")[0] > 12) {
                     tempStart = Number(classItem.startTime.split(":")[0]) - 12;
                     tempStart.toString();
+                    tempStart += ':'+classItem.startTime.split(":")[1];
                     tempStart += 'pm';
                 }
                 else {
@@ -143,6 +144,7 @@ const createNewClass = () => {
                 if (classItem.endTime.split(":")[0] > 12) {
                     tempEnd = Number(classItem.endTime.split(":")[0]) - 12;
                     tempEnd.toString();
+                    tempEnd += ':'+classItem.endTime.split(":")[1];
                     tempEnd += 'pm';
                 }
                 else {
