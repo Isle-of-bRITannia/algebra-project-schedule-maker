@@ -6,13 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Schedule</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
+  <div id="statusCol">
+    <p id="statusHeader">Status</p>
+    <p class="statusInfo"># Credits: 15</p>
+    <p class="statusInfo">Status: Fulltime</p>
+    <p class="statusInfo">
+      <button type="button" id="show-popup" >Add Class</button>
+    </p>
+    <p class="statusInfo">Async classes</p>
+  </div>
+
+
   <table id="scheduleTable">
     <tr>
-      <th>Status</th>
       <th>Monday</th>
       <th>Tuesday</th>
       <th>Wednesday</th>
@@ -21,7 +31,6 @@
       <th>Saturday</th>
     </tr>
     <tr id="row1">
-      <td class="statusCol"># Credits</td>
       <td class="monCol classInfo">IGME-460 3:00-3:15pm</td>
       <td class="tuesCol classInfo">IGME-480 11:00-12:15pm</td>
       <td class="wedCol classInfo">IGME-460 3:00-3:15pm</td>
@@ -30,7 +39,6 @@
       <td class="satCol classInfo">IGME-480 11:00-12:15pm</td>
     </tr>
     <tr id="row2">
-      <td class="statusCol">Fulltime</td>
       <td class="monCol classInfo">PSYC-223 10:00-10:50am</td>
       <td class="tuesCol classInfo">IGME-340 6:30-7:15pm</td>
       <td class="wedCol classInfo">PSYC-223 10:00-10:50am</td>
@@ -39,9 +47,6 @@
       <td class="satCol classInfo">IGME-340 6:30-7:15pm</td>
     </tr>
     <tr id="row3">
-      <td class="statusCol">
-        <button type="button" id="show-popup">Add Class</button>
-      </td>
       <td class="monCol classInfo">PSYC-223 10:00-10:50am</td>
       <td class="tuesCol classInfo">IGME-340 6:30-7:15pm</td>
       <td class="wedCol classInfo">PSYC-223 10:00-10:50am</td>
@@ -50,7 +55,6 @@
       <td class="satCol classInfo">IGME-340 6:30-7:15pm</td>
     </tr>
     <tr id="rowLast">
-      <td class="statusCol async">Async classes</td>
       <td class="monCol classInfo"></td>
       <td class="tuesCol classInfo">IGME-123 1:30-2:30pm</td>
       <td class="wedCol classInfo"></td>
@@ -100,7 +104,7 @@
 
           <div id="pop-media-btns">
 
-            <button type="button" class='pop-media-btn' id="pop-media-clear">Clear</button>
+            <button type="button" class='pop-media-btn' id="pop-media-clear">Close</button>
             <button type="button" class='pop-media-btn' id="pop-media-add">Add</button>
           </div>
         </form>
@@ -148,7 +152,7 @@
 
           <div id="pop-media-btns">
 
-            <button type="button" class='pop-media-btn' id="pop-media-editclear">Clear</button>
+            <button type="button" class='pop-media-btn' id="pop-media-editclear">Close</button>
             <button type="button" class='pop-media-btn' id="pop-media-edit">Confirm Change</button>
           </div>
         </form>

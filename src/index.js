@@ -9,9 +9,19 @@ const popClear = document.querySelector('#pop-media-clear');
 const popEditClear = document.querySelector('#pop-media-editclear');
 const popup = document.querySelector('#show-popup');
 
+// field vars for add class
+const fieldName = document.querySelector('#class-name');
+const fieldStartTime = document.querySelector('#start-time');
+const fieldEndTime = document.querySelector('#end-time');
+const fieldDay = document.querySelector('#class-day');
+const fieldCredits = document.querySelector('#class-credits');
+const fieldLocation = document.querySelector('#class-location');
+const fieldProfessor = document.querySelector('#class-professor');
+
 document.querySelectorAll(".classInfo").forEach(
-    (i) => i.addEventListener('click', () => {
+    (i) => i.addEventListener('click', (e) => {
         editpopUp();
+        console.log(e.target);
     })
 )
 
@@ -78,23 +88,25 @@ const createNewClass = () => {
             ,
             [
                 {
-                    name: document.querySelector('#class-name').value,
-                    startTime: document.querySelector('#start-time').value,
-                    endTime: document.querySelector('#end-time').value,
-                    day: document.querySelector('#class-day').value,
-                    location: document.querySelector('#class-location').value,
-                    professor: document.querySelector('#class-professor').value
+                    name: fieldName.value,
+                    startTime: fieldStartTime.value,
+                    endTime: fieldEndTime.value,
+                    day: fieldDay.value,
+                    credits: fieldCredits.value,
+                    location: fieldLocation.value,
+                    professor: fieldProfessor.value
                 }
             ]);
 
     console.log(display()(scheduleB));
 
-    console.log('name:' + document.querySelector('#class-name').value,
-        'startTime:' + document.querySelector('#start-time').value,
-        'endTime:' + document.querySelector('#end-time').value,
-        'day:' + document.querySelector('#class-day').value,
-        'location:' + document.querySelector('#class-location').value,
-        'professor:' + document.querySelector('#class-professor').value);
+    console.log('name:' + fieldName.value,
+        'startTime:' + fieldStartTime.value,
+        'endTime:' + fieldEndTime.value,
+        'day:' + fieldDay.value,
+        'credits' + fieldCredits.value,
+        'location:' + fieldLocation.value,
+        'professor:' + fieldProfessor.value);
 }
 
 // const res = display()(scheduleA);
@@ -105,8 +117,22 @@ const createNewClass = () => {
 
 
 //event listeners
+// Add Class pop up
 popAdd.addEventListener('click', createNewClass);
 popup.addEventListener('click', addpopUp);
-popClear.addEventListener('click', addpopUp);
+popClear.addEventListener('click', () => {
+    addpopUp();
+
+    // clear values on add pop class up close
+    fieldName.value = "";
+    fieldStartTime.value = "";
+    fieldEndTime.value = "";
+    fieldDay.value = "";
+    fieldCredits.value = "";
+    fieldLocation.value = "";
+    fieldProfessor.value = "";
+});
+
+// Edit pop up
 popEdit.addEventListener('click', editpopUp);
 popEditClear.addEventListener('click', editpopUp);
