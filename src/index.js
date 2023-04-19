@@ -150,9 +150,10 @@ const createNewClass = () => {
                     tempEnd.toString();
                     tempEnd += 'am';
                 }
-                newCell.innerHTML = `${classItem.name}, <br> ${tempStart}-${tempEnd} , <br> ${classItem.location} , <br> ${classItem.professor}`;
+                newCell.innerHTML = `${classItem.name} <br> ${tempStart}-${tempEnd}  <br> ${classItem.location}  <br> ${classItem.professor}`;
             } else {
                 let newCell = rowElement.insertCell();
+                newCell.classList.add("emptyclassInfo");
                 newCell.innerHTML = "";
             }
         }
