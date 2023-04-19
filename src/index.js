@@ -5,19 +5,22 @@ import { display } from './visualize/display.js';
 //pop up varibles
 const popAdd = document.querySelector('#pop-media-add');
 popAdd.setAttribute('disabled', 'disabled');
-const popEdit = document.querySelector('#pop-media-edit');
+// const popEdit = document.querySelector('#pop-media-edit');
 const popAddClose = document.querySelector('#pop-media-cancel');
 const popEditClose = document.querySelector('#pop-media-editcancel');
 const popClear = document.querySelector('#pop-media-clear');
-const popEditClear = document.querySelector('#pop-media-editclear');
+// const popEditClear = document.querySelector('#pop-media-editclear');
 const popup = document.querySelector('#show-popup');
+const popDelete = document.querySelector('#deleteClass');
 
 const scheduleTable = document.querySelector('#scheduleTable');
 
 let currentRow = 5;
 let daysOfTheWeek = ["async", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 document.querySelectorAll(".classInfo").forEach(
-    (i) => i.addEventListener('click', () => {
+    (i) => i.addEventListener('click', (e) => {
+
+        document.querySelector('#delete-class-id').innerHTML = e.target.id;
         editpopUp();
     })
 )
@@ -131,7 +134,7 @@ const createNewClass = () => {
                 if (classItem.startTime.split(":")[0] > 12) {
                     tempStart = Number(classItem.startTime.split(":")[0]) - 12;
                     tempStart.toString();
-                    tempStart += ':'+classItem.startTime.split(":")[1];
+                    tempStart += ':' + classItem.startTime.split(":")[1];
                     tempStart += 'pm';
                 }
                 else {
@@ -143,7 +146,7 @@ const createNewClass = () => {
                 if (classItem.endTime.split(":")[0] > 12) {
                     tempEnd = Number(classItem.endTime.split(":")[0]) - 12;
                     tempEnd.toString();
-                    tempEnd += ':'+classItem.endTime.split(":")[1];
+                    tempEnd += ':' + classItem.endTime.split(":")[1];
                     tempEnd += 'pm';
                 }
                 else {
@@ -171,10 +174,103 @@ const createNewClass = () => {
 
         }
     }
+    document.querySelectorAll(".classInfo").forEach(
+        (i) => i.addEventListener('click', (e) => {
+
+            document.querySelector('#delete-class-id').innerHTML = e.target.id;
+            editpopUp();
+        })
+    )
     addpopUp();
+};
+
+const deleteClass = (id) => {
+
+        scheduleA = Schedule.delete(scheduleA, id);
+        // remove all current rows
+        document.querySelectorAll(".rowOfClasses").forEach(
+            (r) => { r.remove() }
+        );
+        const res = display()(scheduleA);
+        if (Schedule.validate(res.oldSchedule)) {
+            console.log(res);
+            // make array of classers per day
+            const monClasses = res.filter((c) => c.day === "Monday");
+            const tuesClasses = res.filter((c) => c.day === "Tuesday");
+            const wedClasses = res.filter((c) => c.day === "Wednesday");
+            const thursClasses = res.filter((c) => c.day === "Thursday");
+            const friClasses = res.filter((c) => c.day === "Friday");
+            const satClasses = res.filter((c) => c.day === "Saturday");
+    
+            // finding the day with the most classes
+            const numClasses = [monClasses.length, tuesClasses.length, wedClasses.length, thursClasses.length, friClasses.length, satClasses.length];
+            const mostClasses = Math.max(...numClasses);
+    
+    
+            // make the row elements function
+            const makeCell = (classItem, rowElement) => {
+                if (classItem) {
+                    let newCell = rowElement.insertCell();
+                    newCell.classList.add("classInfo");
+                    newCell.setAttribute("id", classItem.id);
+                    let tempStart;
+                    let tempEnd;
+                    if (classItem.startTime.split(":")[0] > 12) {
+                        tempStart = Number(classItem.startTime.split(":")[0]) - 12;
+                        tempStart.toString();
+                        tempStart += ':' + classItem.startTime.split(":")[1];
+                        tempStart += 'pm';
+                    }
+                    else {
+                        tempStart = classItem.startTime;
+                        tempStart.toString();
+                        tempStart += 'am';
+                    }
+    
+                    if (classItem.endTime.split(":")[0] > 12) {
+                        tempEnd = Number(classItem.endTime.split(":")[0]) - 12;
+                        tempEnd.toString();
+                        tempEnd += ':' + classItem.endTime.split(":")[1];
+                        tempEnd += 'pm';
+                    }
+                    else {
+                        tempEnd = classItem.endTime;
+                        tempEnd.toString();
+                        tempEnd += 'am';
+                    }
+                    newCell.innerHTML = `${classItem.name} <br> ${tempStart}-${tempEnd}  <br> ${classItem.location}  <br> ${classItem.professor}`;
+                } else {
+                    let newCell = rowElement.insertCell();
+                    newCell.classList.add("emptyclassInfo");
+                    newCell.innerHTML = "";
+                }
+            }
+    
+            for (let i = 0; i < mostClasses; i++) {
+                const newRow = scheduleTable.insertRow();
+                newRow.classList.add("rowOfClasses");
+    
+                makeCell(monClasses[i], newRow);
+                makeCell(tuesClasses[i], newRow);
+                makeCell(wedClasses[i], newRow);
+                makeCell(thursClasses[i], newRow);
+                makeCell(friClasses[i], newRow);
+                makeCell(satClasses[i], newRow);
+    
+            }
+        }
+        document.querySelectorAll(".classInfo").forEach(
+            (i) => i.addEventListener('click', (e) => {
+    
+                document.querySelector('#delete-class-id').innerHTML = e.target.id;
+                editpopUp();
+            })
+        )
+        editpopUp();
 }
 
-//disable the addClass button if the fields are empty
+
+// //disable the addClass button if the fields are empty
 const addClassButton = () => {
     if (document.querySelector('#class-name').value.trim() !== "" &&
         document.querySelector('#start-time').value.trim() !== "" &&
@@ -200,8 +296,11 @@ document.querySelector('#class-credits').addEventListener('change', addClassButt
 popAdd.addEventListener('click', createNewClass);
 popup.addEventListener('click', addpopUp);
 popClear.addEventListener('click', clearAddFields);
-popEdit.addEventListener('click', editpopUp);
-popEditClear.addEventListener('click', editpopUp);
+//popEdit.addEventListener('click', editpopUp);
+//popEditClear.addEventListener('click', editpopUp);
 popAddClose.addEventListener('click', addpopUp);
 popAddClose.addEventListener('click', addpopUp);
-popEditClose.addEventListener('click', editpopUp);
+//popEditClose.addEventListener('click', editpopUp);
+popDelete.onclick = function (e) {
+    deleteClass(document.querySelector('#delete-class-id').innerHTML);
+};
