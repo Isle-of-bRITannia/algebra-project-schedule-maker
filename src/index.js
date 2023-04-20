@@ -184,7 +184,18 @@ const createNewClass = () => {
             editpopUp();
         })
     )
-    document.querySelector('.statusInfo').innerHTML = `# Credits: ${totalCredits}`;
+    document.querySelectorAll('.statusInfo')[0].innerHTML = `# Credits: ${totalCredits}`;
+
+
+    if (totalCredits > 18) {
+        document.querySelectorAll('.statusInfo')[1].innerHTML = `Status: Full Honnors`;
+    }
+    if (totalCredits > 15) {
+        document.querySelectorAll('.statusInfo')[1].innerHTML = `Status: Full Time`;
+    }
+    if (totalCredits < 15) {
+        document.querySelectorAll('.statusInfo')[1].innerHTML = `Status: Part Time`;
+    }
     addpopUp();
 };
 
@@ -272,7 +283,16 @@ const deleteClass = (id) => {
             editpopUp();
         })
     )
-    document.querySelector('.statusInfo').innerHTML = `# Credits: ${totalCredits}`;
+    document.querySelectorAll('.statusInfo')[0].innerHTML = `# Credits: ${totalCredits}`;
+    if (totalCredits > 18) {
+        document.querySelectorAll('.statusInfo')[1].innerHTML = `Status: Full Time[Honnors]`;
+    }
+    if (totalCredits > 15) {
+        document.querySelectorAll('.statusInfo')[1].innerHTML = `Status: Full Time`;
+    }
+    if (totalCredits < 15) {
+        document.querySelectorAll('.statusInfo')[1].innerHTML = `Status: Part Time`;
+    }
 
 
     editpopUp();
