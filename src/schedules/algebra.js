@@ -26,13 +26,3 @@ const Alg = {
 
 
 export { Alg };
-
-
-// const Base = (name, startTime, endTime, location, professor, credits) => ({
-//     tag: 'base',
-//     name, startTime, endTime, location, professor, credits
-// });
-
-// const EditedSchedule = (editInfo, schedule) => ({
-//     tag: 'edit',
-//     schedule,

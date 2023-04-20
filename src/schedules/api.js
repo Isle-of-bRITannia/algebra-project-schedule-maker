@@ -18,19 +18,3 @@ const API = {
 export {
     API as Schedule
 }
-
-// edit -> sched
-// delete (evt, sched)
-// combine(schedA, schedB)
-// base 
-// validate(a, b) => schedule 
-
-
-// schedule types:
-//  scedule with conflicts
-
-
-//  EditedSchedule
-//  DeletedSchedule
-//  ConcatSchedule
-//  Validated

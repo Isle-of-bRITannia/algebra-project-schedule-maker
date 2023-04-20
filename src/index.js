@@ -6,11 +6,10 @@ import { display } from './visualize/display.js';
 const popAdd = document.querySelector('#pop-media-add');
 // default set to disabled
 popAdd.setAttribute('disabled', 'disabled');
-// const popEdit = document.querySelector('#pop-media-edit');
+const popEdit = document.querySelector('#pop-media-edit');
 const popAddClose = document.querySelector('#pop-media-cancel');
 const popEditClose = document.querySelector('#pop-media-editcancel');
 const popClear = document.querySelector('#pop-media-clear');
-// const popEditClear = document.querySelector('#pop-media-editclear');
 const popup = document.querySelector('#show-popup');
 const popDelete = document.querySelector('#deleteClass');
 
@@ -263,11 +262,13 @@ const createNewClass = () => {
                     endTime: document.querySelector('#end-time').value,
                     day: document.querySelector('#class-day').value,
                     location: document.querySelector('#class-location').value,
-                    credits: document.querySelector('#class-credits').value,
+                    credits: Number(document.querySelector('#class-credits').value),
                     professor: document.querySelector('#class-professor').value
                 }
             ]);
     res = display()(scheduleA);
+    addpopUp();
+
     makeTable(res);
 
 }
@@ -300,6 +301,8 @@ const deleteClass = (id) => {
 
     scheduleA = Schedule.delete(scheduleA, id);
     res = display()(scheduleA);
+    editpopUp();
+
     makeTable(res);
 }
 
@@ -364,7 +367,6 @@ popClear.addEventListener('click', clearAddFields);
 
 // Edit
 popEdit.addEventListener('click', editClass);
-popEditClear.addEventListener('click', editpopUp);
 popEditClose.addEventListener('click', editpopUp);
 
 // Delete

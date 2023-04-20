@@ -15,7 +15,6 @@ const display = () => match({
         return combinedSchedule;
     },
     delete: ({ schedule, idOfScheduleToDelete, }) => {
-        debugger;
         const combinedSchedule = display()(schedule);
         const modifiedArray = combinedSchedule.filter( (s) => s.id != idOfScheduleToDelete)
         return modifiedArray;
@@ -97,11 +96,3 @@ const getClassInfo = (readClass) => {
     Location: ${readClass.location}`;
 };
 
-
-// ScheduleList = [
-//     {
-//    id: "123" ,
-//    class: {className:"guess", }
-//     },
-// ]
-// ScheduleList[]
