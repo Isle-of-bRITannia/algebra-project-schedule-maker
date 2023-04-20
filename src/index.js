@@ -14,9 +14,8 @@ const popup = document.querySelector('#show-popup');
 const popDelete = document.querySelector('#deleteClass');
 
 const scheduleTable = document.querySelector('#scheduleTable');
+let totalCredits = 0;
 
-let currentRow = 5;
-let daysOfTheWeek = ["async", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 document.querySelectorAll(".classInfo").forEach(
     (i) => i.addEventListener('click', (e) => {
 
@@ -99,10 +98,12 @@ const createNewClass = () => {
                     startTime: document.querySelector('#start-time').value,
                     endTime: document.querySelector('#end-time').value,
                     day: document.querySelector('#class-day').value,
+                    credits: Number(document.querySelector('#class-credits').value),
                     location: document.querySelector('#class-location').value,
                     professor: document.querySelector('#class-professor').value
                 }
             ]);
+    totalCredits = 0;
     // remove all current rows
     document.querySelectorAll(".rowOfClasses").forEach(
         (r) => { r.remove() }
@@ -126,6 +127,7 @@ const createNewClass = () => {
         // make the row elements function
         const makeCell = (classItem, rowElement) => {
             if (classItem) {
+                totalCredits += classItem.credits;
                 let newCell = rowElement.insertCell();
                 newCell.classList.add("classInfo");
                 newCell.setAttribute("id", classItem.id);
@@ -164,6 +166,7 @@ const createNewClass = () => {
 
         for (let i = 0; i < mostClasses; i++) {
             const newRow = scheduleTable.insertRow();
+            newRow.classList.add("rowOfClasses");
 
             makeCell(monClasses[i], newRow);
             makeCell(tuesClasses[i], newRow);
@@ -181,93 +184,100 @@ const createNewClass = () => {
             editpopUp();
         })
     )
+    document.querySelector('.statusInfo').innerHTML = `# Credits: ${totalCredits}`;
     addpopUp();
 };
 
 const deleteClass = (id) => {
+    totalCredits = 0;
 
-        scheduleA = Schedule.delete(scheduleA, id);
-        // remove all current rows
-        document.querySelectorAll(".rowOfClasses").forEach(
-            (r) => { r.remove() }
-        );
-        const res = display()(scheduleA);
-        if (Schedule.validate(res.oldSchedule)) {
-            console.log(res);
-            // make array of classers per day
-            const monClasses = res.filter((c) => c.day === "Monday");
-            const tuesClasses = res.filter((c) => c.day === "Tuesday");
-            const wedClasses = res.filter((c) => c.day === "Wednesday");
-            const thursClasses = res.filter((c) => c.day === "Thursday");
-            const friClasses = res.filter((c) => c.day === "Friday");
-            const satClasses = res.filter((c) => c.day === "Saturday");
-    
-            // finding the day with the most classes
-            const numClasses = [monClasses.length, tuesClasses.length, wedClasses.length, thursClasses.length, friClasses.length, satClasses.length];
-            const mostClasses = Math.max(...numClasses);
-    
-    
-            // make the row elements function
-            const makeCell = (classItem, rowElement) => {
-                if (classItem) {
-                    let newCell = rowElement.insertCell();
-                    newCell.classList.add("classInfo");
-                    newCell.setAttribute("id", classItem.id);
-                    let tempStart;
-                    let tempEnd;
-                    if (classItem.startTime.split(":")[0] > 12) {
-                        tempStart = Number(classItem.startTime.split(":")[0]) - 12;
-                        tempStart.toString();
-                        tempStart += ':' + classItem.startTime.split(":")[1];
-                        tempStart += 'pm';
-                    }
-                    else {
-                        tempStart = classItem.startTime;
-                        tempStart.toString();
-                        tempStart += 'am';
-                    }
-    
-                    if (classItem.endTime.split(":")[0] > 12) {
-                        tempEnd = Number(classItem.endTime.split(":")[0]) - 12;
-                        tempEnd.toString();
-                        tempEnd += ':' + classItem.endTime.split(":")[1];
-                        tempEnd += 'pm';
-                    }
-                    else {
-                        tempEnd = classItem.endTime;
-                        tempEnd.toString();
-                        tempEnd += 'am';
-                    }
-                    newCell.innerHTML = `${classItem.name} <br> ${tempStart}-${tempEnd}  <br> ${classItem.location}  <br> ${classItem.professor}`;
-                } else {
-                    let newCell = rowElement.insertCell();
-                    newCell.classList.add("emptyclassInfo");
-                    newCell.innerHTML = "";
+    scheduleA = Schedule.delete(scheduleA, id);
+    // remove all current rows
+    document.querySelectorAll(".rowOfClasses").forEach(
+        (r) => { r.remove() }
+    );
+    const res = display()(scheduleA);
+    if (Schedule.validate(res.oldSchedule)) {
+        console.log(res);
+        // make array of classers per day
+        const monClasses = res.filter((c) => c.day === "Monday");
+        const tuesClasses = res.filter((c) => c.day === "Tuesday");
+        const wedClasses = res.filter((c) => c.day === "Wednesday");
+        const thursClasses = res.filter((c) => c.day === "Thursday");
+        const friClasses = res.filter((c) => c.day === "Friday");
+        const satClasses = res.filter((c) => c.day === "Saturday");
+
+        // finding the day with the most classes
+        const numClasses = [monClasses.length, tuesClasses.length, wedClasses.length, thursClasses.length, friClasses.length, satClasses.length];
+        const mostClasses = Math.max(...numClasses);
+
+
+        // make the row elements function
+        const makeCell = (classItem, rowElement) => {
+            if (classItem) {
+                totalCredits += classItem.credits;
+                let newCell = rowElement.insertCell();
+                newCell.classList.add("classInfo");
+                newCell.setAttribute("id", classItem.id);
+                let tempStart;
+                let tempEnd;
+                if (classItem.startTime.split(":")[0] > 12) {
+                    tempStart = Number(classItem.startTime.split(":")[0]) - 12;
+                    tempStart.toString();
+                    tempStart += ':' + classItem.startTime.split(":")[1];
+                    tempStart += 'pm';
                 }
-            }
-    
-            for (let i = 0; i < mostClasses; i++) {
-                const newRow = scheduleTable.insertRow();
-                newRow.classList.add("rowOfClasses");
-    
-                makeCell(monClasses[i], newRow);
-                makeCell(tuesClasses[i], newRow);
-                makeCell(wedClasses[i], newRow);
-                makeCell(thursClasses[i], newRow);
-                makeCell(friClasses[i], newRow);
-                makeCell(satClasses[i], newRow);
-    
+                else {
+                    tempStart = classItem.startTime;
+                    tempStart.toString();
+                    tempStart += 'am';
+                }
+
+                if (classItem.endTime.split(":")[0] > 12) {
+                    tempEnd = Number(classItem.endTime.split(":")[0]) - 12;
+                    tempEnd.toString();
+                    tempEnd += ':' + classItem.endTime.split(":")[1];
+                    tempEnd += 'pm';
+                }
+                else {
+                    tempEnd = classItem.endTime;
+                    tempEnd.toString();
+                    tempEnd += 'am';
+                }
+                newCell.innerHTML = `${classItem.name} <br> ${tempStart}-${tempEnd}  <br> ${classItem.location}  <br> ${classItem.professor}`;
+            } else {
+                let newCell = rowElement.insertCell();
+                newCell.classList.add("emptyclassInfo");
+                newCell.innerHTML = "";
             }
         }
-        document.querySelectorAll(".classInfo").forEach(
-            (i) => i.addEventListener('click', (e) => {
-    
-                document.querySelector('#delete-class-id').innerHTML = e.target.id;
-                editpopUp();
-            })
-        )
-        editpopUp();
+
+        for (let i = 0; i < mostClasses; i++) {
+            const newRow = scheduleTable.insertRow();
+            newRow.classList.add("rowOfClasses");
+
+            makeCell(monClasses[i], newRow);
+            makeCell(tuesClasses[i], newRow);
+            makeCell(wedClasses[i], newRow);
+            makeCell(thursClasses[i], newRow);
+            makeCell(friClasses[i], newRow);
+            makeCell(satClasses[i], newRow);
+
+        }
+    }
+    document.querySelectorAll(".classInfo").forEach(
+        (i) => i.addEventListener('click', (e) => {
+
+            document.querySelector('#delete-class-id').innerHTML = e.target.id;
+            editpopUp();
+        })
+    )
+    document.querySelector('.statusInfo').innerHTML = `# Credits: ${totalCredits}`;
+
+
+    editpopUp();
 }
+
 
 
 // //disable the addClass button if the fields are empty
