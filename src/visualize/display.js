@@ -61,7 +61,7 @@ const display = () => match({
 
         const calcAllCredits = (oldSchedule) => {
             const totalCredits = oldSchedule.reduce((total, course) => total + course.credits, 0);
-            return console.log(totalCredits);
+            return totalCredits;
         };
 
         const checkIdUnique = (oldSchedule) => {

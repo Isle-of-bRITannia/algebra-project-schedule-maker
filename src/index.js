@@ -6,15 +6,17 @@ import { display } from './visualize/display.js';
 const popAdd = document.querySelector('#pop-media-add');
 // default set to disabled
 popAdd.setAttribute('disabled', 'disabled');
-const popEdit = document.querySelector('#pop-media-edit');
+// const popEdit = document.querySelector('#pop-media-edit');
 const popAddClose = document.querySelector('#pop-media-cancel');
 const popEditClose = document.querySelector('#pop-media-editcancel');
 const popClear = document.querySelector('#pop-media-clear');
-const popEditClear = document.querySelector('#pop-media-editclear');
+// const popEditClear = document.querySelector('#pop-media-editclear');
 const popup = document.querySelector('#show-popup');
+const popDelete = document.querySelector('#deleteClass');
 
 // Reference to the table
 const scheduleTable = document.querySelector('#scheduleTable');
+let totalCredits = 0;
 
 // edit fields refrences var names
 const editFieldName = document.querySelector('#edit-class-name');
@@ -24,6 +26,7 @@ const editFieldLocation = document.querySelector('#edit-class-room');
 const editFieldDay = document.querySelector('#edit-class-day');
 const editFieldProfessor = document.querySelector('#edit-class-professor');
 const editFieldCredits = document.querySelector('#edit-class-credits');
+
 
 // Current schedule
 let res;
@@ -98,7 +101,6 @@ const clearAddFields = () => {
     document.querySelector('#class-name').value = "";
     document.querySelector('#start-time').value = '';
     document.querySelector('#end-time').value = '';
-    document.querySelector('#class-day').value = '';
     document.querySelector('#class-location').value = '';
     document.querySelector('#class-professor').value = '';
     document.querySelector('#class-credits').value = '';
@@ -131,6 +133,9 @@ const sortByTime = (classA, classB) => {
 
 // Create the table based on the schedule
 const makeTable = (res) => {
+
+    totalCredits = 0;
+
     // remove all current rows
     document.querySelectorAll(".rowOfClasses").forEach(
         (r) => { r.remove() }
@@ -155,6 +160,7 @@ const makeTable = (res) => {
         // make the row elements function - how to display
         const makeCell = (classItem, rowElement) => {
             if (classItem) {
+                totalCredits += classItem.credits;
                 let newCell = rowElement.insertCell();
                 newCell.classList.add("classInfo");
                 newCell.setAttribute("id", classItem.id);
@@ -163,6 +169,7 @@ const makeTable = (res) => {
                 if (classItem.startTime.split(":")[0] > 12) {
                     tempStart = Number(classItem.startTime.split(":")[0]) - 12;
                     tempStart.toString();
+                    tempStart += ':' + classItem.startTime.split(":")[1];
                     tempStart += 'pm';
                 }
                 else {
@@ -174,6 +181,7 @@ const makeTable = (res) => {
                 if (classItem.endTime.split(":")[0] > 12) {
                     tempEnd = Number(classItem.endTime.split(":")[0]) - 12;
                     tempEnd.toString();
+                    tempEnd += ':' + classItem.endTime.split(":")[1];
                     tempEnd += 'pm';
                 }
                 else {
@@ -181,9 +189,10 @@ const makeTable = (res) => {
                     tempEnd.toString();
                     tempEnd += 'am';
                 }
-                newCell.innerHTML = `${classItem.name}, <br> ${tempStart}-${tempEnd} , <br> ${classItem.location} , <br> ${classItem.professor}`;
+                newCell.innerHTML = `${classItem.name} <br> ${tempStart}-${tempEnd}  <br> ${classItem.location}  <br> ${classItem.professor}`;
             } else {
                 let newCell = rowElement.insertCell();
+                newCell.classList.add("emptyclassInfo");
                 newCell.innerHTML = "";
             }
         }
@@ -201,6 +210,17 @@ const makeTable = (res) => {
             makeCell(satClasses[i], newRow);
 
         }
+    }
+    // update student status and credits
+     document.querySelectorAll('.statusInfo')[0].innerHTML = `# Credits: ${totalCredits}`;
+    if (totalCredits > 18) {
+        document.querySelectorAll('.statusInfo')[1].innerHTML = `Status: Full Time[Honnors]`;
+    }
+    if (totalCredits > 15) {
+        document.querySelectorAll('.statusInfo')[1].innerHTML = `Status: Full Time`;
+    }
+    if (totalCredits < 15) {
+        document.querySelectorAll('.statusInfo')[1].innerHTML = `Status: Part Time`;
     }
 
     // add on click for each class
@@ -220,6 +240,8 @@ const makeTable = (res) => {
 
         })
     );
+    
+   
 }
 
 
@@ -270,6 +292,14 @@ const editClass = () => {
     res = display()(scheduleEdited);
 
     editpopUp();
+    makeTable(res);
+}
+
+const deleteClass = (id) => {
+    totalCredits = 0;
+
+    scheduleA = Schedule.delete(scheduleA, id);
+    res = display()(scheduleA);
     makeTable(res);
 }
 
@@ -336,3 +366,8 @@ popClear.addEventListener('click', clearAddFields);
 popEdit.addEventListener('click', editClass);
 popEditClear.addEventListener('click', editpopUp);
 popEditClose.addEventListener('click', editpopUp);
+
+// Delete
+popDelete.onclick = function (e) {
+    deleteClass(currSchedId);
+};

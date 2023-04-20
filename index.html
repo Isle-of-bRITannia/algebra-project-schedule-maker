@@ -56,8 +56,17 @@
             <input type="text" name="Class Room" id="class-location" placeholder="Class name">
           </div>
           <div>
-            <label for="Class Days">Class Days:</label>
-            <input type="text" name="Class Days" id="class-day" placeholder="Days">
+            <div>
+              <label for="days">Class Room:</label>
+              <select name="days" id="class-day">
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+              </select>
+            </div>
           </div>
           <div>
             <label for="Start Time">Start Time</label>
@@ -119,7 +128,7 @@
 
           <div id="pop-media-btns">
             <button type="button" class='pop-media-btn' id="pop-media-editcancel">cancel</button>
-            <button type="button" class='pop-media-btn' id="pop-media-editclear">Clear</button>
+            <button type="button" class='pop-media-btn' id="deleteClass">Delete This Class</button>
             <button type="button" class='pop-media-btn' id="pop-media-edit">Confirm Change</button>
           </div>
         </form>
