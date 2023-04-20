@@ -3,14 +3,13 @@ import { Alg } from "../schedules/algebra.js";
 
 const display = () => match({
     create: ({ oldSchedule, newSchedule }) => {
-        newSchedule.forEach((s) => s.id = randomNum());
+        newSchedule.forEach((s) => s.id  === undefined ? s.id = randomNum() : "");
         return [
             ...oldSchedule,
             ...newSchedule
         ]
     },
     edit: ({ schedule, idOfScheduleToChange, valueToChange, newValue }) => {
-        debugger;
         const combinedSchedule = display()(schedule);
         combinedSchedule.forEach( (s) => s.id == idOfScheduleToChange ? s[valueToChange] = newValue : "")
         return combinedSchedule;
